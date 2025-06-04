@@ -1,6 +1,10 @@
 import React from "react";
 
-const Stats = ({ items = [] }) => {
+const Stats = ({ items }) => {
+  if (items.length === 0)
+    return (
+      <p className="stats">Start adding some items to your packing list 🧳</p>
+    );
   const numItems = items.length;
   const packedItems = items.filter((item) => item.packed).length;
   const percentage =
@@ -9,9 +13,7 @@ const Stats = ({ items = [] }) => {
   return (
     <footer className="stats">
       <em>
-        {numItems === 0
-          ? "Start adding some items to your packing list 🧳"
-          : percentage === 100
+        {percentage === 100
           ? "You got everything! Ready to go ✈️"
           : `💼 You have ${numItems} items on your list and already packed ${packedItems} (${percentage}%).`}
       </em>
